@@ -3,8 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Members from "./pages/Members";
-// Update the import path to match the actual file name and extension, e.g.:
 import AttendancePage from "./pages/Attendance";
+import Allpayments from "./pages/Payments";
+import Reports from "./pages/Report";
 
 function App() {
   return (
@@ -16,6 +17,10 @@ function App() {
           <Route path="/members" element={<Members />} />
           <Route path="/attendance" element={<AttendancePage />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/payments" element={<Allpayments />} />
+          <Route path="/reports" element={<Reports />} />
+          {/* Add more routes as needed */}
+          
         </Routes>
       </BrowserRouter>
     </>
