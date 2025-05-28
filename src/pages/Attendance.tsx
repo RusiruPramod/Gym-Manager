@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { motion } from "framer-motion";
 import {
   Calendar,
   Users,
@@ -26,6 +27,19 @@ type Attendance = {
   timeIn: string;
 };
 
+const chartContainerVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
+
 // Mock Data
 const mockAttendance: Attendance[] = [
   {
@@ -39,21 +53,21 @@ const mockAttendance: Attendance[] = [
     attendanceId: 2,
     memberId: 101,
     memberName: "John Doe",
-    date: "2024-01-06",
+    date: "2025-05-28",
     timeIn: "08:25 AM",
   },
   {
     attendanceId: 3,
     memberId: 101,
     memberName: "John Doe",
-    date: "2024-02-10",
+    date: "2025-05-28",
     timeIn: "07:55 AM",
   },
   {
     attendanceId: 4,
     memberId: 101,
     memberName: "John Doe",
-    date: "2024-02-11",
+    date: "2025-05-28",
     timeIn: "08:00 AM",
   },
   {
@@ -105,69 +119,7 @@ const mockAttendance: Attendance[] = [
     date: "2024-03-01",
     timeIn: "09:10 AM",
   },
-  {
-    attendanceId: 14,
-    memberId: 102,
-    memberName: "Jane Smith",
-    date: "2024-04-10",
-    timeIn: "08:55 AM",
-  },
-  {
-    attendanceId: 15,
-    memberId: 102,
-    memberName: "Jane Smith",
-    date: "2025-01-03",
-    timeIn: "09:00 AM",
-  },
-  {
-    attendanceId: 16,
-    memberId: 102,
-    memberName: "Jane Smith",
-    date: "2025-03-12",
-    timeIn: "08:40 AM",
-  },
-  {
-    attendanceId: 17,
-    memberId: 102,
-    memberName: "Jane Smith",
-    date: "2025-05-01",
-    timeIn: "09:05 AM",
-  },
-  {
-    attendanceId: 37,
-    memberId: 102,
-    memberName: "Jane Smith",
-    date: "2020-05-14",
-    timeIn: "09:15 AM",
-  },
-  {
-    attendanceId: 18,
-    memberId: 103,
-    memberName: "Peter Jones",
-    date: "2004-02-14",
-    timeIn: "08:00 AM",
-  },
-  {
-    attendanceId: 19,
-    memberId: 103,
-    memberName: "Peter Jones",
-    date: "2014-08-15",
-    timeIn: "08:10 AM",
-  },
-  {
-    attendanceId: 20,
-    memberId: 103,
-    memberName: "Peter Jones",
-    date: "2025-06-10",
-    timeIn: "08:20 AM",
-  },
-  {
-    attendanceId: 21,
-    memberId: 103,
-    memberName: "Peter Jones",
-    date: "2021-02-20",
-    timeIn: "08:05 AM",
-  },
+ 
 ];
 
 export default function AttendancePage() {
@@ -304,7 +256,7 @@ export default function AttendancePage() {
       </aside>
 
       {/* Main content */}
-      <main className="fixed  p-2 left-64 right-0 top-0 bottom-0 overflow-y-auto bg-gray-50">
+      <main className="fixed  p-2 left-64 right-0 top-0 bottom-0 overflow-y-auto bg-gray-50 ">
         <div className="flex-1 p-6">
           {/* Header */}
           <div className="flex justify-between items-center mb-12">
@@ -558,102 +510,108 @@ export default function AttendancePage() {
           )}
 
           {/* Details View */}
-          {viewMode === "details" &&
-            selectedUserAttendance &&
-            selectedMemberId && (
-              <div className="space-y-6">
-                <button
-                  onClick={goBackToList}
-                  className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  Back to Overview
-                </button>
+         {viewMode === "details" &&
+  selectedUserAttendance &&
+  selectedMemberId && (
+    <div className="space-y-6">
+      <button
+        onClick={goBackToList}
+        className="flex items-center gap-2 text-slate-600 hover:text-slate-800 transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back to Overview
+      </button>
 
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <h2 className="text-2xl font-bold text-slate-800 mb-6">
-                    Attendance Details:{" "}
-                    {
-                      attendanceData.find(
-                        (m) => m.memberId === selectedMemberId
-                      )?.memberName
-                    }
-                  </h2>
+      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+        <h2 className="text-2xl font-bold text-slate-800 mb-6">
+          Attendance Details:{" "}
+          {
+            attendanceData.find(
+              (m) => m.memberId === selectedMemberId
+            )?.memberName
+          }
+        </h2>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Monthly Chart */}
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-semibold text-slate-700">
-                        Monthly Attendance
-                      </h3>
-                      <div className="h-64 bg-gray-50 rounded-lg p-4">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={selectedUserAttendance.byMonth}>
-                            <CartesianGrid
-                              strokeDasharray="3 3"
-                              stroke="#e2e8f0"
-                            />
-                            <XAxis dataKey="name" stroke="#64748b" />
-                            <YAxis stroke="#64748b" />
-                            <Tooltip
-                              contentStyle={{
-                                backgroundColor: "white",
-                                border: "1px solid #e2e8f0",
-                                borderRadius: "8px",
-                              }}
-                            />
-                            <Bar
-                              dataKey="days"
-                              fill="#f97316"
-                              radius={[4, 4, 0, 0]}
-                            />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Monthly Chart */}
+          <motion.div
+  className="space-y-4"
+  initial="hidden"
+  whileInView="visible"
+  viewport={{ once: false, amount: 0.2 }} // 
+  variants={chartContainerVariants}
+>
 
-                    {/* Daily Chart */}
-                    <div className="space-y-4">
-                      <h3 className="text-lg font-semibold text-slate-700">
-                        Daily Attendance
-                      </h3>
-                      <div className="h-64 bg-gray-50 rounded-lg p-4">
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart
-                            data={selectedUserAttendance.byDay.slice(-10)}
-                          >
-                            <CartesianGrid
-                              strokeDasharray="3 3"
-                              stroke="#e2e8f0"
-                            />
-                            <XAxis
-                              dataKey="name"
-                              stroke="#64748b"
-                              angle={-45}
-                              textAnchor="end"
-                              height={80}
-                            />
-                            <YAxis stroke="#64748b" />
-                            <Tooltip
-                              contentStyle={{
-                                backgroundColor: "white",
-                                border: "1px solid #e2e8f0",
-                                borderRadius: "8px",
-                              }}
-                            />
-                            <Bar
-                              dataKey="days"
-                              fill="#3b82f6"
-                              radius={[4, 4, 0, 0]}
-                            />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
+            <h3 className="text-lg font-semibold text-slate-700">
+              Monthly Attendance
+            </h3>
+            <div className="h-64 bg-gray-50 rounded-lg p-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={selectedUserAttendance.byMonth}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                  <XAxis dataKey="name" stroke="#64748b" />
+                  <YAxis stroke="#64748b" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "white",
+                      border: "1px solid #e2e8f0",
+                      borderRadius: "8px",
+                    }}
+                  />
+                  <Bar
+                    dataKey="days"
+                    fill="#f97316"
+                    radius={[4, 4, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+
+          {/* Daily Chart */}
+          <motion.div 
+            className="space-y-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={chartContainerVariants}
+            transition={{ delay: 0.2 }}
+          >
+            <h3 className="text-lg font-semibold text-slate-700">
+              Daily Attendance
+            </h3>
+            <div className="h-64 bg-gray-50 rounded-lg p-4">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={selectedUserAttendance.byDay.slice(-10)}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
+                  <XAxis
+                    dataKey="name"
+                    stroke="#64748b"
+                    angle={-45}
+                    textAnchor="end"
+                    height={80}
+                  />
+                  <YAxis stroke="#64748b" />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "white",
+                      border: "1px solid #e2e8f0",
+                      borderRadius: "8px",
+                    }}
+                  />
+                  <Bar
+                    dataKey="days"
+                    fill="#3b82f6"
+                    radius={[4, 4, 0, 0]}
+                  />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  )}
         </div>
       </main>
     </div>
