@@ -1,9 +1,32 @@
-import { Home, Users, Calendar, CreditCard, BarChart, Settings, Dumbbell, Bell } from "lucide-react";
+import {
+  Home,
+  Users,
+  Calendar,
+  CreditCard,
+  BarChart,
+  Settings,
+  Dumbbell,
+  Bell,
+} from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
+  const { pathname } = useLocation();
+
+  const navItems = [
+    { to: "/dashboard", icon: Home, label: "Dashboard" },
+    { to: "/members", icon: Users, label: "Members" },
+    { to: "/attendance", icon: Calendar, label: "Attendance" },
+    { to: "/payments", icon: CreditCard, label: "Payments" },
+    { to: "/reports", icon: BarChart, label: "Reports" },
+    { to: "/workouts", icon: Dumbbell, label: "Progress Tracking" },
+    { to: "/notifications", icon: Bell, label: "Notifications" },
+    { to: "/settings", icon: Settings, label: "Settings" },
+  ];
+
   return (
     <>
-      {/* Sidebar for Desktop and Tablet */}
+      {/* Desktop Sidebar */}
       <aside className="hidden md:block h-screen w-64 bg-slate-900 text-white p-6 shadow-xl">
         <div className="flex items-center gap-3 mb-8">
           <div className="p-2 bg-orange-500 rounded-lg">
@@ -13,74 +36,55 @@ const Sidebar = () => {
         </div>
 
         <nav className="space-y-2">
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-orange-500 text-white font-medium">
-            <Home className="w-5 h-5" />
-            Dashboard
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer">
-            <Users className="w-5 h-5" />
-            Members
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer">
-            <Calendar className="w-5 h-5" />
-            Attendance
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer">
-            <CreditCard className="w-5 h-5" />
-            Payments
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer">
-            <BarChart className="w-5 h-5" />
-            Reports
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer">
-            <Dumbbell className="w-5 h-5" />
-            Workouts
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer">
-            <Bell className="w-5 h-5" />
-            Notifications
-          </div>
-
-          <div className="flex items-center gap-3 p-3 rounded-lg hover:bg-slate-800 transition-colors cursor-pointer">
-            <Settings className="w-5 h-5" />
-            Settings
-          </div>
+          {navItems.map(({ to, icon: Icon, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className={`flex items-center gap-3 p-3 rounded-lg transition-colors font-medium ${
+                pathname === to
+                  ? "bg-orange-500 text-white"
+                  : "hover:bg-slate-800 text-slate-300"
+              }`}
+            >
+              <Icon className="w-5 h-5" />
+              {label}
+            </Link>
+          ))}
         </nav>
       </aside>
 
-      {/* Bottom Navigation for Mobile */}
+      {/* Mobile Bottom Navigation */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-slate-900 text-white shadow-2xl z-50 border-t border-slate-700">
         <div className="flex justify-around items-center py-2">
-          <div className="flex flex-col items-center p-2 text-orange-500">
-            <Home className="w-5 h-5" />
-            <span className="text-xs mt-1 font-medium">Home</span>
-          </div>
-          <div className="flex flex-col items-center p-2 text-slate-400 hover:text-white transition-colors">
-            <Users className="w-5 h-5" />
-            <span className="text-xs mt-1">Members</span>
-          </div>
-          <div className="flex flex-col items-center p-2 text-slate-400 hover:text-white transition-colors">
-            <Calendar className="w-5 h-5" />
-            <span className="text-xs mt-1">Attendance</span>
-          </div>
-          <div className="flex flex-col items-center p-2 text-slate-400 hover:text-white transition-colors">
-            <CreditCard className="w-5 h-5" />
-            <span className="text-xs mt-1">Payments</span>
-          </div>
-          <div className="flex flex-col items-center p-2 text-slate-400 hover:text-white transition-colors relative">
+          {navItems.slice(0, 4).map(({ to, icon: Icon, label }) => (
+            <Link
+              key={to}
+              to={to}
+              className={`flex flex-col items-center p-2 ${
+                pathname === to
+                  ? "text-orange-500"
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              <Icon className="w-5 h-5" />
+              <span className="text-xs mt-1">{label}</span>
+            </Link>
+          ))}
+
+          <Link
+            to="/notifications"
+            className={`flex flex-col items-center p-2 relative ${
+              pathname === "/notifications"
+                ? "text-orange-500"
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
             <Bell className="w-5 h-5" />
             <span className="text-xs mt-1">Alerts</span>
             <span className="absolute -top-1 -right-1 inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-red-500 rounded-full">
               3
             </span>
-          </div>
+          </Link>
         </div>
       </nav>
     </>
