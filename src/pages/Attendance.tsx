@@ -251,30 +251,31 @@ export default function AttendancePage() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <aside className="fixed left-0 top-0 h-full w-64 bg-white shadow-md z-50">
+      <aside className="fixed left-0 top-0 h-full  bg-white shadow-md z-50">
         <Sidebar />
       </aside>
 
       {/* Main content */}
-      <main className="fixed  p-2 left-64 right-0 top-0 bottom-0 overflow-y-auto bg-gray-50 ">
-        <div className="flex-1 p-6">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-12">
-            <div>
-              <h1 className="text-3xl font-bold text-slate-800">Attendance</h1>
-              <p className="text-slate-600 mt-1">
-                Track and manage member attendance records
-              </p>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-slate-500">
-                Today: {formatDate(new Date())}
-              </div>
-              <div className="text-lg font-semibold text-slate-700">
-                {currentTime}
-              </div>
-            </div>
-          </div>
+      <main className="fixed min-h-screen p-2 md:left-64 left-0 right-0 top-0 bottom-0 overflow-y-auto bg-gray-50">
+  <div className="flex-1 p-6">
+    {/* Header */}
+    <div className="flex justify-between items-center mb-12">
+      <div>
+        <h1 className="text-3xl font-bold text-slate-800">Attendance</h1>
+        <p className="text-slate-600 mt-1">
+          Track and manage member attendance records
+        </p>
+      </div>
+      <div className="text-right">
+        <div className="text-sm text-slate-500">
+          Today: {formatDate(new Date())}
+        </div>
+        <div className="text-lg font-semibold text-slate-700">
+          {currentTime}
+        </div>
+      </div>
+    </div>
+
 
           {viewMode === "list" && (
             <>

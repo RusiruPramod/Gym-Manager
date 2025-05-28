@@ -194,27 +194,27 @@ export default function PaymentsPage() {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      <aside className="fixed left-0 top-0 h-full w-64 bg-white shadow-md z-50">
+      <aside className="fixed left-0 top-0 h-full  bg-white shadow-md z-50">
         <Sidebar />
       </aside>
 
       {/* Main content */}
-      <main className="fixed p-4 left-64 right-0 top-0 bottom-0 overflow-y-auto bg-gray-50">
-        <div className="flex-1 p-6">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-            <div className="mb-4 md:mb-0">
-              <h1 className="text-3xl font-bold text-slate-800">Payments</h1>
-              <p className="text-slate-600 mt-1">
-                Track and manage member payment records
-              </p>
-            </div>
-            <div className="text-right">
-              <div className="text-sm text-slate-500">
-                {formatDate(new Date())}
-              </div>
-            </div>
-          </div>
+      <main className="fixed inset-0 overflow-y-auto bg-gray-40 md:left-64 left-0 p-4">
+  <div className="flex-1 p-4 max-w-screen-xl mx-auto">
+    {/* Header */}
+    <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+      <div className="mb-4 md:mb-0">
+        <h1 className="text-3xl font-bold text-slate-800">Payments</h1>
+        <p className="text-slate-600 mt-1">
+          Track and manage member payment records
+        </p>
+      </div>
+      <div className="text-right">
+        <div className="text-sm text-slate-500">
+          {formatDate(new Date())}
+        </div>
+      </div>
+    </div>
 
           {viewMode === "list" && (
             <>

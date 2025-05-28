@@ -3,18 +3,13 @@ import {
   CreditCard,
   DollarSign,
   RefreshCw,
-  BarChart2,
   CheckCircle,
-  AlertCircle,
-  Clock,
   Filter,
   Search,
-  Download, // For export
-  Printer,  // For print
-  Users,    // For total members stat card
-  Activity, // For average attendance stat card
-  Wallet,   // For payments stat card (though DollarSign is also used)
-  CalendarCheck // For memberships stat card
+  Download, 
+  Printer,  
+  Users,    
+  Activity 
 } from 'lucide-react';
 import Sidebar from '../components/ui/sidebar'; // Ensure this path is correct for your project
 
@@ -64,9 +59,9 @@ const ReportsPage = () => {
         upcomingRenewals: 24,
         nextRenewalDate: 'May 28',
         paymentMethodsBreakdown: [
-            { method: 'Credit/Debit', percentage: 65, color: 'bg-blue-600', icon: <CreditCard className="w-4 h-4" /> },
-            { method: 'Bank Transfer', percentage: 20, color: 'bg-purple-600', icon: <RefreshCw className="w-4 h-4" /> }, // Reusing RefreshCw as a generic bank icon for example
-            { method: 'Cash', percentage: 15, color: 'bg-green-600', icon: <DollarSign className="w-4 h-4" /> }
+            { method: 'Credit/Debit', percentage: 65, color: 'bg-orange-400', icon: <CreditCard className="w-4 h-4" /> },
+            { method: 'Bank Transfer', percentage: 20, color: 'bg-orange-500', icon: <RefreshCw className="w-4 h-4" /> }, // Reusing RefreshCw as a generic bank icon for example
+            { method: 'Cash', percentage: 15, color: 'bg-orange-600', icon: <DollarSign className="w-4 h-4" /> }
         ]
     }
   };
@@ -89,14 +84,14 @@ const ReportsPage = () => {
   );
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden">
+    <div className="flex h-screen  bg-gray-50  overflow-hidden">
       <Sidebar />
-      <div className="flex-1 overflow-y-auto">
-        <div className="p-4 md:p-8">
+      <div className="flex-1 bg-gray-40 overflow-y-auto">
+        <div className="p-2 md:p-8">
           {/* Header Section */}
           <div className="mb-8 flex justify-between items-center">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-slate-800 mb-2">Reports Dashboard</h1>
+              <h1 className="text-3xl md:text-3xl font-bold text-slate-800 mb-2">Reports Dashboard</h1>
               <p className="text-slate-600">Analyze and export your gym data</p>
             </div>
             <div className="hidden md:flex items-center space-x-4">
@@ -113,25 +108,25 @@ const ReportsPage = () => {
             <nav className="-mb-px flex space-x-8">
               <button
                 onClick={() => setActiveTab('attendance')}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'attendance' ? 'border-blue-600 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'attendance' ? 'border-orange-400 text-orange-400' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
               >
                 Attendance
               </button>
               <button
                 onClick={() => setActiveTab('payments')}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'payments' ? 'border-blue-600 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'payments' ? 'border-orange-400 text-orange-400' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
               >
                 Payments
               </button>
               <button
                 onClick={() => setActiveTab('memberships')}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'memberships' ? 'border-blue-600 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'memberships' ? 'border-orange-400 text-orange-400' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
               >
                 Memberships
               </button>
               <button
                 onClick={() => setActiveTab('revenue')}
-                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'revenue' ? 'border-blue-600 text-blue-700' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
+                className={`whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'revenue' ? 'border-orange-400 text-orange-400' : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'}`}
               >
                 Revenue
               </button>
@@ -144,10 +139,10 @@ const ReportsPage = () => {
             <StatCard
               title="Total Members"
               value={reportsData.totalMembers.toLocaleString()}
-              icon={<Users className="w-5 h-5 text-blue-600" />}
+              icon={<Users className="w-5 h-5 text-orange-500" />}
               footer={
                 <div className="mt-4 pt-4 border-t border-slate-100">
-                  <p className="text-sm text-green-600">+12% from last month</p>
+                  <p className="text-sm text-orange-500">+12% from last month</p>
                 </div>
               }
             />
@@ -164,10 +159,10 @@ const ReportsPage = () => {
             <StatCard
               title="Avg. Daily Attendance"
               value={`${reportsData.avgAttendancePerDay}/day`}
-              icon={<Activity className="w-5 h-5 text-orange-600" />}
+              icon={<Activity className="w-5 h-5 text-blue-600" />}
               footer={
                 <div className="mt-4 pt-4 border-t border-slate-100">
-                  <p className="text-sm text-green-600">+5% from last week</p>
+                  <p className="text-sm text-blue-600">+5% from last week</p>
                 </div>
               }
             />
@@ -177,7 +172,7 @@ const ReportsPage = () => {
               icon={<DollarSign className="w-5 h-5 text-purple-600" />}
               footer={
                 <div className="mt-4 pt-4 border-t border-slate-100">
-                  <p className="text-sm text-green-600">+15% from last month</p>
+                  <p className="text-sm text-purple-600">+15% from last month</p>
                 </div>
               }
             />
@@ -200,13 +195,13 @@ const ReportsPage = () => {
                   <input
                     type="text"
                     placeholder="Search..."
-                    className="pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-full"
+                    className="pl-10 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 w-full"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
                 <select
-                  className="block w-full sm:w-auto px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm"
+                  className="block w-full sm:w-auto px-3 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 text-sm"
                   value={dateRange}
                   onChange={(e) => setDateRange(e.target.value)}
                 >
@@ -277,14 +272,14 @@ const ReportsPage = () => {
                             {item.duration}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-center">
-                            <button className="text-blue-600 hover:text-blue-900 mr-3 text-sm">View</button>
-                            <button className="text-slate-600 hover:text-slate-900 text-sm">Export</button>
+                            <button className="text-orange-500 hover:text-orange-600 mr-3 text-sm">View</button>
+                            <button className="text-slate-900 hover:text-slate-600 text-sm">Export</button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="6" className="px-6 py-4 text-center text-sm text-slate-500">
+                        <td colSpan={6} className="px-6 py-4 text-center text-sm text-slate-500">
                           No attendance records found.
                         </td>
                       </tr>
@@ -351,14 +346,14 @@ const ReportsPage = () => {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-center">
-                            <button className="text-blue-600 hover:text-blue-900 mr-3 text-sm">View</button>
+                            <button className="text-orange-500 mr-3 text-sm">View</button>
                             <button className="text-slate-600 hover:text-slate-900 text-sm">Receipt</button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="7" className="px-6 py-4 text-center text-sm text-slate-500">
+                        <td colSpan={7} className="px-6 py-4 text-center text-sm text-slate-500">
                           No payment records found.
                         </td>
                       </tr>
@@ -414,19 +409,19 @@ const ReportsPage = () => {
                             {item.expiryDate}
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-center">
-                            <span className="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            <span className="px-2.5 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-slate-100 text-slate-800">
                               {item.status}
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-center">
-                            <button className="text-blue-600 hover:text-blue-900 mr-3 text-sm">View</button>
+                            <button className="text-orange-500 hover:text-orange-600 mr-3 text-sm">View</button>
                             <button className="text-slate-600 hover:text-slate-900 text-sm">Export</button>
                           </td>
                         </tr>
                       ))
                     ) : (
                       <tr>
-                        <td colSpan="7" className="px-6 py-4 text-center text-sm text-slate-500">
+                        <td colSpan={7} className="px-6 py-4 text-center text-sm text-slate-500">
                           No membership records found.
                         </td>
                       </tr>
@@ -494,7 +489,7 @@ const ReportsPage = () => {
                       Previous
                     </button>
                     <div className="flex items-center gap-1">
-                      <button className="px-3 py-1 border border-blue-500 rounded-md text-sm font-medium text-white bg-blue-500 hover:bg-blue-600">
+                      <button className="px-3 py-1 border rounded-md text-sm font-medium text-white bg-orange-400 hover:bg-orange-600">
                         1
                       </button>
                       <button className="px-3 py-1 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50">
@@ -519,7 +514,14 @@ const ReportsPage = () => {
 };
 
 // Reusable StatCard Component
-const StatCard = ({ title, value, icon, footer }) => (
+type StatCardProps = {
+  title: string;
+  value: string | number;
+  icon: React.ReactNode;
+  footer?: React.ReactNode;
+};
+
+const StatCard: React.FC<StatCardProps> = ({ title, value, icon, footer }) => (
   <div className="bg-white rounded-xl shadow-lg p-6 border border-slate-200 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
     <div className="flex justify-between">
       <div>
