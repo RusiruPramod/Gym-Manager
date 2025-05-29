@@ -10,6 +10,7 @@ import  Progres  from "./pages/Tracking";
 import Notify from "./pages/notification";
 import Sett from "./pages/Setting";
 
+
 function App() {
   return (
     <>

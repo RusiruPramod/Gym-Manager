@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import Sidebar from "../components/ui/sidebar";
 import Prochart from "../components/progreschart";
+import Performance from "../components/ui/PerformanceSummary";
 
 const TrackingPage = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -380,14 +381,13 @@ const TrackingPage = () => {
             </div>
 
             {/* Dynamic Content */}
-            <div className="overflow-x-auto">
+            <div className="overflow-hidden">
               {activeTab === "overview" && (
-                  <div className="h-80 bg-slate-100 rounded p-2">
-                    <div className="w-full h-full">
-                      <Prochart />
-                    </div>
+                <div className="h-80 bg-slate-100 rounded p-2">
+                  <div className="w-full h-full">
+                    <Prochart />
                   </div>
-               
+                </div>
               )}
 
               {activeTab === "activity" && (
@@ -462,7 +462,7 @@ const TrackingPage = () => {
                             </span>
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-center">
-                            <button className="text-blue-600 hover:text-blue-900 mr-3 text-sm">
+                            <button className="text-orange-600 hover:text-blue-900 mr-3 text-sm">
                               Details
                             </button>
                             <button className="text-slate-600 hover:text-slate-900 text-sm">
@@ -542,7 +542,7 @@ const TrackingPage = () => {
                               <div className="w-full mr-2">
                                 <ProgressBar
                                   value={item.progress}
-                                  color={"bg-red-500"}
+                                  color={"bg-orange-400"}
                                 />
                               </div>
                               <div className="text-sm text-slate-500">
@@ -593,38 +593,9 @@ const TrackingPage = () => {
               )}
 
               {activeTab === "performance" && (
-                <div className="p-6">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                    <div className="bg-white p-4 rounded-lg border border-slate-200">
-                      <h3 className="text-lg font-medium text-slate-800 mb-4">
-                        Performance Metrics
-                      </h3>
-                      <div className="h-64 bg-slate-100 rounded flex items-center justify-center">
-                        <p className="text-slate-500">
-                          Performance metrics chart will be displayed here
-                        </p>
-                      </div>
-                    </div>
-                    <div className="bg-white p-4 rounded-lg border border-slate-200">
-                      <h3 className="text-lg font-medium text-slate-800 mb-4">
-                        Member Comparison
-                      </h3>
-                      <div className="h-64 bg-slate-100 rounded flex items-center justify-center">
-                        <p className="text-slate-500">
-                          Member comparison chart will be displayed here
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-white p-4 rounded-lg border border-slate-200">
-                    <h3 className="text-lg font-medium text-slate-800 mb-4">
-                      Long-term Progress
-                    </h3>
-                    <div className="h-80 bg-slate-100 rounded flex items-center justify-center">
-                      <p className="text-slate-500">
-                        Long-term progress chart will be displayed here
-                      </p>
-                    </div>
+                <div className="flex flex-col h-full w-full p-6 overflow-auto">
+                  <div className="flex-1 overflow-auto">
+                    <Performance />
                   </div>
                 </div>
               )}
@@ -648,7 +619,7 @@ const TrackingPage = () => {
                       Previous
                     </button>
                     <div className="flex items-center gap-1">
-                      <button className="px-3 py-1 border border-blue-500 rounded-md text-sm font-medium text-white bg-blue-500 hover:bg-blue-600">
+                      <button className="px-3 py-1 border border- rounded-md text-sm font-medium text-white bg-orange-400 hover:bg-orange-500">
                         1
                       </button>
                       <button className="px-3 py-1 border border-slate-300 rounded-md text-sm font-medium text-slate-700 bg-white hover:bg-slate-50">

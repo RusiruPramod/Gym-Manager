@@ -105,9 +105,12 @@ export default function Members() {
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      <Sidebar />
+     <aside className="fixed left-0 top-0 h-full  bg-white shadow-md z-50">
+        <Sidebar />
+      </aside>
 
       {/* Main Content */}
+        <main className="fixed min-h-screen p-2 md:left-64 left-0 right-0 top-0 bottom-0 overflow-y-auto bg-gray-50">
       <div className="flex-1 p-4 md:p-8 pb-20 md:pb-8">
         {/* Header */}
         <div className="mb-8">
@@ -362,6 +365,8 @@ export default function Members() {
           </div>
         )}
       </div>
+      </main>
     </div>
+    
   );
 }

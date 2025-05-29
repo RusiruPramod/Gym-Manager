@@ -24,6 +24,7 @@ import {
   LogOut,
 } from "lucide-react";
 import Sidebar from "@/components/ui/sidebar";
+import { Link } from "react-router-dom";
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState({
@@ -172,7 +173,8 @@ export default function SettingsPage() {
         {/* Logout Option */}
         <div className="pt-10">
           <button className="flex items-center gap-2 text-red-500 font-semibold">
-            <LogOut className="w-5 h-5" /> Logout
+            <LogOut className="w-5 h-5" /> 
+            <Link to="/login" className="text-red-500 hover:underline">logout</Link>
           </button>
         </div>
       </main>
