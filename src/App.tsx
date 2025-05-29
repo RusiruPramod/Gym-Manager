@@ -9,6 +9,7 @@ import Reports from "./pages/Report";
 import  Progres  from "./pages/Tracking";
 import Notify from "./pages/notification";
 import Sett from "./pages/Setting";
+import LogoutPage from "./pages/logoutpage";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/workouts" element={<Progres />} />
           <Route path="/notifications" element={<Notify />} />
           <Route path="/settings" element={<Sett />} />
+          <Route path="/logoutpage" element={<LogoutPage />} />
           
           
         </Routes>
