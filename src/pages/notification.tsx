@@ -25,7 +25,29 @@ const mockNotifications: Notification[] = [
     isRead: true,
     type: "General",
   },
+  {
+    notificationId: "3",
+    message: "New yoga class starts next Monday.",
+    dateCreated: "2025-05-24T12:45:00Z",
+    isRead: false,
+    type: "General",
+  },
+  {
+    notificationId: "4",
+    message: "Equipment maintenance scheduled for June 3rd.",
+    dateCreated: "2025-05-23T09:20:00Z",
+    isRead: true,
+    type: "General",
+  },
+  {
+    notificationId: "5",
+    message: "Sarah Lee's membership has expired.",
+    dateCreated: "2025-05-22T16:00:00Z",
+    isRead: false,
+    type: "Payment Expired",
+  },
 ];
+
 
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState<Notification[]>([]);
@@ -43,9 +65,9 @@ export default function NotificationsPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-white-50">
       {/* Sidebar */}
-      <div className="w-64 bg-white border-r">
+      <div className=" bg-white border-r">
         <Sidebar />
       </div>
 
@@ -64,17 +86,17 @@ export default function NotificationsPage() {
                 key={notification.notificationId}
                 className={`rounded-lg border shadow-sm p-4 border-l-4 ${
                   notification.type === "Payment Expired"
-                    ? "border-red-500"
-                    : "border-blue-500"
-                } ${!notification.isRead ? "bg-blue-50" : "bg-white"}`}
+                    ? "border-orange-600"
+                    : "border-slate-800"
+                } ${!notification.isRead ? "bg-gray-10" : "bg-white"}`}
               >
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
                       {notification.type === "Payment Expired" ? (
-                        <AlertCircle className="text-red-500 w-5 h-5" />
+                        <AlertCircle className="text-orange-600 w-5 h-5" />
                       ) : (
-                        <Bell className="text-blue-500 w-5 h-5" />
+                        <Bell className="text-black-500 w-5 h-5" />
                       )}
                       <span className="font-medium">
                         {notification.message}
@@ -93,7 +115,7 @@ export default function NotificationsPage() {
                       Mark as Read
                     </button>
                   ) : (
-                    <div className="flex items-center text-green-600 text-sm gap-1">
+                    <div className="flex items-center text-gray-600 text-sm gap-1">
                       <CheckCircle2 className="w-4 h-4" />
                       Read
                     </div>
