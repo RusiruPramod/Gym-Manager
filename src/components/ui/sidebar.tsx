@@ -7,7 +7,9 @@ import {
   Settings,
   Dumbbell,
   Bell,
+  LogOut,
 } from "lucide-react";
+
 import { Link, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
@@ -22,6 +24,7 @@ const Sidebar = () => {
     { to: "/workouts", icon: Dumbbell, label: "Progress Tracking" },
     { to: "/notifications", icon: Bell, label: "Notifications" },
     { to: "/settings", icon: Settings, label: "Settings" },
+    { to: "/logoutpage", icon: LogOut, label: "LogOut" },
   ];
 
   return (
@@ -87,6 +90,8 @@ const Sidebar = () => {
           </Link>
         </div>
       </nav>
+    
+       
     </>
   );
 };
